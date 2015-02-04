@@ -31,6 +31,10 @@
             var track_url = $('#url_input').val()
             SC.get('/resolve', { url: track_url }, function(track) {
                 var img = track.artwork_url
+                if (img == null) {
+                    img = "PASTE_IMAGE_URL"
+                    alert('Image could not be found. Paste your own image url')
+                }
                 img = img.substring(0, img.length-9) + 't500x500.jpg'
                 content = post1+img+post2+img+post3+track.id+post4
                 code.text(content)
