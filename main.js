@@ -12,8 +12,8 @@ $(function () {
 
     var template = '\
         <div class="separator cover_art" style="clear: both; text-align: center;">\
-            <a href="{0}  imageanchor="1" style="margin-left: 1em; margin-right: 1em;">\
-                <img border="0" src="{0} " height="400" width="400" />\
+            <a href="{0}"  imageanchor="1" style="margin-left: 1em; margin-right: 1em;">\
+                <img border="0" src="{0}" height="400" width="400" />\
             </a>\
         </div>\
         <div class="separator soundcloud_player" style="clear: both; text-align: center;">\
@@ -26,7 +26,7 @@ $(function () {
 
     var code = $('#code');
 
-    $('#generate_btn').click(function () {
+    $('#generate-btn').click(function () {
         $('#spinner').show();
         code.html('generating...');
         var track_url = $('#url_input').val();
@@ -34,7 +34,7 @@ $(function () {
             var img = track.artwork_url;
             if (img == null) {
                 img = "PASTE_IMAGE_URL";
-                alert('Image could not be found. Paste your own image url')
+                error('Image could not be found. Paste your own image url into the code')
             } else img = img.substring(0, img.length - 9) + 't500x500.jpg';
             var content = format(template, img, track.id);
             code.text(content);
@@ -48,18 +48,32 @@ $(function () {
        $('#code').slideToggle();
     });
 
-    // Copy To Clipboard code
-    var clipboard = new ZeroClipboard($('#copy_btn'), {
-        moviePath: "ZeroClipboard.swf",
-        debug: false
-    });
-
-    clipboard.on("load", function (clientTarget) {
-        $('#flash-loaded').fadeIn();
-
-        clipboard.on("complete", function (clipboard, args) {
-            clipboard.setText(args.text);
-            $('#target-to-copy-text').slideDown();
+    // Notifications
+    var notify = function (text, type) {
+        noty({
+            text: text,
+            type: type,
+            theme: 'relax',
+            layout: 'topRight',
+            timeout: 4000
         });
-    });
+    };
+    var success = function (text) {
+        notify(text, 'success');
+    };
+    var error = function (text) {
+      notify(text, 'error');
+    };
+
+    // Copy To Clipboard code
+    var client = new ZeroClipboard(document.getElementById("copy-btn"));
+    client.on("ready", function(readyEvent) {
+        // alert( "ZeroClipboard SWF is ready!" );
+
+        client.on("aftercopy", function(event) {
+            // `this` === `client`
+            // `event.target` === the element that was clicked
+            success("Post copied to clipboard :)");
+        } );
+    } );
 });
