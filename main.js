@@ -44,6 +44,12 @@ $(function () {
         })
     });
 
+    // Select all input text on click
+    $('#url-input').click(function () {
+        $(this).select();
+    });
+
+    // Toggle code visibility
     $('#show-code').click(function () {
        $('#code').slideToggle();
     });

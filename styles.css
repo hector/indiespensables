@@ -1,20 +1,20 @@
-.url-input {
+#url-input {
     text-align: center;
 }
 
-.url-input::-webkit-input-placeholder {
+#url-input::-webkit-input-placeholder {
     text-align: center;
 }
 
-.url-input:-moz-placeholder { /* Firefox 18- */
+#url-input:-moz-placeholder { /* Firefox 18- */
     text-align: center;
 }
 
-.url-input::-moz-placeholder {  /* Firefox 19+ */
+#url-input::-moz-placeholder {  /* Firefox 19+ */
     text-align: center;
 }
 
-.url-input:-ms-input-placeholder {
+#url-input:-ms-input-placeholder {
     text-align: center;
 }
 
