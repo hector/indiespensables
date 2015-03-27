@@ -3,60 +3,54 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Indiespensables</title>
+    <!-- Stylesheets -->
+    <link href="bower_components/flat-ui/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
+    <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div>
-        <input id="url_input" type="text" name="url" value="https://soundcloud.com/indiespensables/mixtape-top-2014">
-        <button id="generate_btn" type="button">Generate</button>
-        <button id="copy_btn" data-clipboard-target="code">Click To Copy</button>
+    <div class="container">
+        <h1 class="text-center">Indiespensables Writer</h1>
+        <form>
+            <div class="row">
+                <div class="form-group col-xs-6 col-xs-offset-3">
+                    <input id="url_input" type="text" name="url" class="url-input form-control input-lg"
+                           placeholder="Introduce soundcloud track url"
+                            value="https://soundcloud.com/earmilk/jacklndn-earmilkmix">
+                </div>
+            </div>
+            <div class="row form-group text-center">
+                <button id="generate_btn" type="button" class="btn btn-primary btn-lg">Generate</button>
+                <button id="copy_btn" class="btn btn-default btn-lg" data-clipboard-target="code">Click To Copy</button>
+            </div>
+        </form>
+        <div id='spinner' class="row text-center nodisplay">
+            <i class="fa fa-spinner fa-pulse fa-2x fa-fx"></i>
+        </div>
+        <div id='post-preview' class="row nodisplay">
+            <h3 class="text-center">Post preview</h3>
+            <div id="post-preview-content">
+            </div>
+            <a id="show-code"><h4 class="text-center"><i class="fa fa-eye fa-fx"></i> Code</h4></a>
+        </div>
+        <div class="row text-center">
+            <div id="code" name="Generated code" class="jumbotron nodisplay"></div>
+        </div>
     </div>
-    <textarea id="code" name="Generated code" cols="100" rows="15"></textarea>
+
     <!-- Javascripts -->
     <script src="https://connect.soundcloud.com/sdk.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="ZeroClipboard.min.js"></script>
-    <script>
-        SC.initialize({
-            client_id: '26c48679f3cfd3c12b827bcf82d63df8',
-        });
-        var code = $('#code')
-        var content = ''
-        var post1 = '<div class="separator cover_art" style="clear: both; text-align: center;"><a href="'
-        var post2 = '" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="'
-        var post3 = '" height="400" width="400" /></a></div><div class="separator soundcloud_player" style="clear: both; text-align: center;"><iframe frameborder="no" height="166" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'
-        var post4 = '&amp;color=ED1E79&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false" width="100%"></iframe></div>'
-        var post5 = '<div class="post_text" style="text-align: justify;">Lorem</div>'
-
-        $('#generate_btn').click(function() {
-            code.html('generating...')
-            var track_url = $('#url_input').val()
-            SC.get('/resolve', { url: track_url }, function(track) {
-                var img = track.artwork_url
-                if (img == null) {
-                    img = "PASTE_IMAGE_URL"
-                    alert('Image could not be found. Paste your own image url')
-                } else img = img.substring(0, img.length-9) + 't500x500.jpg'
-                content = post1+img+post2+img+post3+track.id+post4
-                code.text(content)
-            })
-        })
-
-        // Copy To Clipboard code
-        var clipboard = new ZeroClipboard($('#copy_btn'), {
-            moviePath: "ZeroClipboard.swf",
-            debug: false
-        } );
-
-        clipboard.on( "load", function(clientTarget)
-        {
-            $('#flash-loaded').fadeIn();
-
-            clipboard.on( "complete", function(clipboard, args) {
-                clipboard.setText( args.text );
-                $('#target-to-copy-text').fadeIn();
-            } );
-        } );
-
-    </script>
+    <script src="bower_components/flat-ui/dist/js/vendor/jquery.min.js"></script>
+    <script src="bower_components/flat-ui/dist/js/vendor/video.js"></script>
+    <script src="bower_components/flat-ui/dist/js/flat-ui.min.js"></script>
+    <script src="bower_components/zeroclipboard/dist/ZeroClipboard.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

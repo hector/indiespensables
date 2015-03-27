@@ -1,0 +1,27 @@
+{
+  "name": "indiespensables",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hector/indiespensables",
+  "authors": [
+    "Hector Parra <hector@parra.cat>"
+  ],
+  "description": "Helpers to write posts on indiespensables.es",
+  "main": "index.html",
+  "keywords": [
+    "indiespensables"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "zeroclipboard": "~2.2.0",
+    "flat-ui": "~2.2.2",
+    "fontawesome": "~4.3.0"
+  }
+}
