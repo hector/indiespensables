@@ -29,7 +29,7 @@ $(function () {
     $('#generate-btn').click(function () {
         $('#spinner').show();
         code.html('generating...');
-        var track_url = $('#url_input').val();
+        var track_url = $('#url-input').val();
         SC.get('/resolve', {url: track_url}, function (track) {
             var img = track.artwork_url;
             if (img == null) {
